@@ -12,33 +12,3 @@
   from = "/*"
   to = "/index.html"
   status = 200
-```
-
-The first redirect maps `/api/auth/signup` → `/.netlify/functions/auth-signup` cleanly. The second ensures React Router deep links work after refresh.
-
----
-
-## Step 5 — Set Up .gitignore and .env
-
-Your `.gitignore` should include:
-```
-node_modules
-dist
-.env
-.env.local
-```
-
-Your `.env` (never committed):
-```
-VITE_SUPABASE_URL=your_url_here
-VITE_SUPABASE_ANON_KEY=your_anon_key_here
-JWT_SECRET=make_this_a_long_random_string
-DATABASE_URL=your_supabase_postgres_url
-```
-
-Your `.env.example` (committed, no real values):
-```
-VITE_SUPABASE_URL=
-VITE_SUPABASE_ANON_KEY=
-JWT_SECRET=
-DATABASE_URL=
