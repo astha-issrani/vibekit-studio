@@ -1,16 +1,53 @@
-# React + Vite
+# VibeKit Studio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Generate a theme, build a mini-site, publish it.
 
-Currently, two official plugins are available:
+## Live URL
+https://inspiring-salmiakki-b036cf.netlify.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Local Setup
 
-## React Compiler
+1. Clone the repo
+   git clone https://github.com/astha-issrani/vibekit-studio.git
+   cd vibekit-studio
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. Install dependencies
+   npm install
 
-## Expanding the ESLint configuration
+3. Create .env file with these variables:
+   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   JWT_SECRET=your_jwt_secret
+   DATABASE_URL=your_postgres_connection_string
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+4. Run locally
+   netlify dev
+
+5. Open http://localhost:8888
+
+## Environment Variables Required
+- VITE_SUPABASE_URL — Supabase project URL
+- VITE_SUPABASE_ANON_KEY — Supabase publishable key
+- JWT_SECRET — Random 32-byte hex string for signing JWTs
+- DATABASE_URL — PostgreSQL connection string (Supabase pooler URL)
+
+## Test Credentials
+Sign up with any email/password at /signup
+
+## Auth Approach
+JWT stored in httpOnly cookie. On signup/login, server creates a signed JWT 
+and sets it as a cookie. All authenticated API routes verify this cookie 
+server-side using jsonwebtoken. Passwords hashed with bcryptjs (10 rounds).
+
+## Database
+PostgreSQL via Supabase with 3 tables:
+- users (id, email, password_hash, created_at)
+- pages (id, user_id, title, slug, status, theme, content jsonb, view_count)
+- contact_submissions (id, page_id, name, email, message)
+
+## Tradeoffs + What I'd Improve Next
+- Would add image upload support instead of URL-only gallery
+- Would add auto-save with debouncing instead of manual save
+- Would add custom domain support for published pages
+- Would add drag-and-drop section reordering
+- Would add more theme customization (user can tweak colors)
