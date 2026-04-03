@@ -87,7 +87,9 @@ export async function duplicatePage(id) {
   return res.json()
 }
 
+
 export async function getPublicPage(slug) {
   const res = await fetch(`/api/public/pages/${slug}`)
+  console.log('Fetching public page:', slug, res.status)
   return res.json()
 }
